@@ -20,7 +20,7 @@ public class AuthUserDetails extends AuthUserPoJo implements UserDetails {
     public AuthUserDetails(AuthUserPoJo user) {
         if (user != null) {
             this.setUserName(user.getUserName());
-            this.setPassWord(user.getPassWord());
+            this.setUserPwd(user.getUserPwd());
             this.setStatus(user.getStatus());
             this.setRoleInfos(user.getRoleInfos());
             this.setPermissionInfos(user.getPermissionInfos());
@@ -44,7 +44,7 @@ public class AuthUserDetails extends AuthUserPoJo implements UserDetails {
 
     @Override
     public String getPassword() {
-        return super.getPassWord();
+        return super.getUserPwd();
     }
 
     @Override

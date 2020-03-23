@@ -19,9 +19,9 @@
         SELECT
             spi.*
         FROM
-          role_info sri
-        INNER JOIN map_role_permission smrp ON smrp.role_id = sri.id
-        INNER JOIN permission_info spi ON smrp.permission_id = spi.id
+          USER_INFO sri
+        INNER JOIN MAP_ROLE_PERMISSION smrp ON smrp.role_id = sri.id
+        INNER JOIN PERMISSION_INFO spi ON smrp.permission_id = spi.id
         where
          spi.status = 'enable'
 
@@ -31,7 +31,7 @@
         SELECT
             sri.*
         FROM
-          role_info sri
+          USER_INFO sri
         where
          sri.status = 'enable'
     </select>

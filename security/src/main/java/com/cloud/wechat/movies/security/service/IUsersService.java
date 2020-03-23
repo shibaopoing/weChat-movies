@@ -1,7 +1,7 @@
 package com.cloud.wechat.movies.security.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cloud.wechat.movies.security.entity.Users;
+import com.cloud.wechat.movies.security.entity.UserInfo;
 import com.cloud.wechat.movies.security.pojo.AuthUserPoJo;
 
 /**
@@ -12,7 +12,7 @@ import com.cloud.wechat.movies.security.pojo.AuthUserPoJo;
  * @author liuheming
  * @since 2019-05-06
  */
-public interface IUsersService extends IService<Users> {
+public interface IUsersService extends IService<UserInfo> {
 
     /**
      * @return com.lhm.springcloud.security.pojo.AuthUserPoJo

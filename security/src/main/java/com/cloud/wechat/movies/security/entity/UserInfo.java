@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @since 2019-05-06
  */
 @Data
-public class Users implements Serializable {
+public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,26 +26,29 @@ public class Users implements Serializable {
      * 用户名
      */
     private String userName;
-
+    /**
+     * 用户编号
+     */
+    private String userCode;
     /**
      * 密码
      */
-    private String passWord;
+    private String userPwd;
 
     /**
      * 用户头像地址
      */
-    private String avatar;
+    private String faceImage;
 
     /**
      * 手机号
      */
-    private Integer mobile;
+    private Integer userPhone;
 
     /**
      * 邮箱
      */
-    private String email;
+    private String userEmail;
 
     /**
      * 用户昵称

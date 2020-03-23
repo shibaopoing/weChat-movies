@@ -17,8 +17,9 @@ import java.util.List;
 public class AuthUserPoJo {
     private String userId;
     private String userName;
-    private String passWord;
+    private String userPwd;
     private String status;
+    private String userCode;
     private List<RoleInfo> roleInfos;
     private List<PermissionInfo> permissionInfos;
 }
