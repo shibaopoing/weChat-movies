@@ -49,9 +49,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         if (e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
-            String username = request.getParameter("username");
-            recordLoginTime(username);
-            String key = "loginTimeLimit:" + username;
+            String userName = request.getParameter("userName");
+            recordLoginTime(userName);
+            String key = "loginTimeLimit:" + userName;
             String value = redisTemplate.opsForValue().get(key);
             if (StringUtils.isBlank(value)) {
                 value = "0";
@@ -69,10 +69,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     /**
      * 判断用户登陆错误次数
      */
-    public boolean recordLoginTime(String username) {
+    public boolean recordLoginTime(String userName) {
 
-        String key = "loginTimeLimit:" + username;
-        String flagKey = "loginFailFlag:" + username;
+        String key = "loginTimeLimit:" + userName;
+        String flagKey = "loginFailFlag:" + userName;
         String value = redisTemplate.opsForValue().get(key);
         if (StringUtils.isBlank(value)) {
             value = "0";

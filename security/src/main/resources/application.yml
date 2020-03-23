@@ -56,6 +56,7 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+        heart-beat-interval: 10
       config:
         server-addr: 127.0.0.1:8848
 security:
@@ -63,10 +64,12 @@ security:
   loginTimeLimit: 10
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.lhm.springcloud.security.entity
+  type-aliases-package: com.cloud.wechat.movies.security.entity
+  configuration:
+    map-underscore-to-camel-case: false
 logging:
   level:
-    com.lhm.springcloud.security: DEBUG
+    com.cloud.wechat.movies.security: DEBUG
 management:
   endpoints:
     web:

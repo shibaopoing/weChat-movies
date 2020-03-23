@@ -22,5 +22,5 @@ public interface UsersMapper extends BaseMapper<UserInfo> {
         * @Param [username]
         * @return com.lhm.springcloud.security.pojo.AuthUserPoJo
      **/
-    AuthUserPoJo findAuthUserByUsername(@Param("username") String username);
+    AuthUserPoJo findAuthUserByUsername(@Param("userName") String username);
 }

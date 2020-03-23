@@ -22,7 +22,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, UserInfo> impleme
     private UsersMapper usersMapper;
 
     @Override
-    public AuthUserPoJo findAuthUserByUsername(String username) {
-        return usersMapper.findAuthUserByUsername(username);
+    public AuthUserPoJo findAuthUserByUsername(String userName) {
+        return usersMapper.findAuthUserByUsername(userName);
     }
 }

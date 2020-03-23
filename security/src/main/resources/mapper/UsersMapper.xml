@@ -3,10 +3,10 @@
 <mapper namespace="com.cloud.wechat.movies.security.mapper.UsersMapper">
     <resultMap id="AuthUserPoJo" type="com.cloud.wechat.movies.security.pojo.AuthUserPoJo">
         <id column="id" jdbcType="VARCHAR" property="userId"/>
-        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
-        <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_pwd" jdbcType="VARCHAR" property="userPwd"/>
         <result column="STATUS" jdbcType="VARCHAR" property="status"/>
-        <result column="USER_CODE" jdbcType="VARCHAR" property="userCode"/>
+        <result column="user_code" jdbcType="VARCHAR" property="userCode"/>
         <collection property="roleInfos" column="id" javaType="ArrayList"
                     ofType="com.cloud.wechat.movies.security.entity.RoleInfo" select="getRolesByUserId"/>
         <collection property="permissionInfos" column="id" javaType="ArrayList"
@@ -16,9 +16,9 @@
     SELECT
         sri.*
     FROM
-        USER_INFO sui
-    INNER JOIN MAP_USER_ROLE smur ON sui.id = smur.user_id
-    INNER JOIN ROLE_INFO sri ON smur.role_id = sri.id
+        user_info sui
+    INNER JOIN map_user_role smur ON sui.id = smur.user_id
+    INNER JOIN role_info sri ON smur.role_id = sri.id
     WHERE
           sui.id=#{id}
     </select>
@@ -27,23 +27,20 @@
     SELECT
         spi.*
     FROM
-         USER_INFO sui
-    INNER JOIN  MAP_USER_ROLE smur ON sui.id = smur.user_id
-    INNER JOIN  ROLE_INFO sri ON smur.role_id = sri.id
-    INNER JOIN  MAP_ROLE_PERMISSION smrp ON smrp.role_id = sri.id
-    INNER JOIN  PERMISSION_INFO spi ON smrp.permission_id = spi.id
+         user_info sui
+    INNER JOIN  map_user_role smur ON sui.id = smur.user_id
+    INNER JOIN  role_info sri ON smur.role_id = sri.id
+    INNER JOIN  map_role_permission smrp ON smrp.role_id = sri.id
+    INNER JOIN  permission_info spi ON smrp.permission_id = spi.id
     WHERE
       sui.id=#{id}
     </select>
     <select id="findAuthUserByUsername" resultMap="AuthUserPoJo">
         SELECT
-            u.id,
-            u.USER_NAME,
-            u.USER_PWD,
-            u.STATUS
+            u.*
         FROM
-            USER_INFO u
+            user_info u
         WHERE
-            u.USER_CODE = #{userCode}
+            u.user_name = #{userName}
     </select>
 </mapper>

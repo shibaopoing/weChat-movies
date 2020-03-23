@@ -2,6 +2,7 @@ package com.cloud.wechat.movies.security.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -23,6 +24,7 @@ import java.nio.charset.Charset;
  * @Date 2019/5/6 10:04
  * @Version 1.0
  **/
+@Log4j2
 public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public MyUsernamePasswordAuthenticationFilter() {
@@ -37,8 +39,8 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
         String username = null, password = null;
         if(StringUtils.hasText(body)) {
             JSONObject jsonObj = JSON.parseObject(body);
-            username = jsonObj.getString("username");
-            password = jsonObj.getString("password");
+            username = jsonObj.getString("userName");
+            password = jsonObj.getString("userPwd");
         }
 
         if (username == null) {

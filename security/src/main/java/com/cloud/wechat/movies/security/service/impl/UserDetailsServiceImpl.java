@@ -38,8 +38,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * @return org.springframework.security.core.userdetails.UserDetails
      **/
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String flagKey = "loginFailFlag:"+username;
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        String flagKey = "loginFailFlag:"+userName;
         String value = redisTemplate.opsForValue().get(flagKey);
         if(StringUtils.isNotBlank(value)){
             //超过限制次数
@@ -47,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         //查询用户信息
-        AuthUserPoJo authUserPoJo=iUsersService.findAuthUserByUsername(username);
+        AuthUserPoJo authUserPoJo=iUsersService.findAuthUserByUsername(userName);
         if(null==authUserPoJo){
             throw new UsernameNotFoundException("当前用户不存在");
         }
