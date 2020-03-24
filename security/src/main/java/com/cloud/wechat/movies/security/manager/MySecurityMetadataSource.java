@@ -51,7 +51,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         String redisConfigAttributesPermission=redisTemplate.opsForValue().get("configAttributes:permissions");
         if(StringUtils.isBlank(redisConfigAttributesPermission)){
             QueryWrapper<PermissionInfo> permissionInfoQueryWrapper=new QueryWrapper<>();
-            permissionInfoQueryWrapper.lambda().eq(PermissionInfo::getStatus,"enable");
+            permissionInfoQueryWrapper.lambda().eq(PermissionInfo::getStatus,"1");
             List<PermissionInfo> permissionInfos=findRoleInfoAndPermission.list(permissionInfoQueryWrapper);
 
             for (PermissionInfo permissionInfo:permissionInfos) {

@@ -10,12 +10,16 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import sun.misc.BASE64Decoder;
 
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -29,7 +33,7 @@ import java.util.*;
  * @Version 1.0
  **/
 @Component
-public class TokenUtil {
+public class TokenUtil<main> {
     /**
      * @Author liuheming
      * @Description 生成新的token方法，并将角色保存
@@ -114,13 +118,22 @@ public class TokenUtil {
    /** * 解码PrivateKey * @param key * @return */
    public static PrivateKey getPrivateKey(String key) {
        try {
-           byte[] byteKey = Base64.getDecoder().decode(key);
-           PKCS8EncodedKeySpec x509EncodedKeySpec = new PKCS8EncodedKeySpec(byteKey);
-           KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-           return keyFactory.generatePrivate(x509EncodedKeySpec);
+          // byte[] byteKey = Base64.getDecoder().decode("bGl1aGVtaW5n");
+           byte[] decoded = (new BASE64Decoder()).decodeBuffer("NTQ1NjQ2NTRkc2Y0c2Q0ZnNkZnNkNTZmNHNkNTY0ZjU2c2Rm");
+           PrivateKey pubKey =  KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(decoded));
+           return pubKey;
        } catch (Exception e) {
            e.printStackTrace();
        }    return null;
    }
-
+    /**
+     * 测试
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        String str = "54564654dsf4sd4fsdfsd56f4sd564f56sdf";
+        String res = Base64.getEncoder().encodeToString(str.getBytes());
+       System.out.println(res);
+    }
 }

@@ -11,5 +11,5 @@ public interface UserConstant {
     /**
      * 用户正常状态
      */
-    String USER_STATUS_NORMAL = "enable";
+    String USER_STATUS_NORMAL = "1";
 }

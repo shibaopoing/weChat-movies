@@ -4,7 +4,7 @@
     <resultMap id="RoleInfo" type="com.cloud.wechat.movies.security.entity.RoleInfo">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
         <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
         <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
         <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
@@ -19,11 +19,11 @@
         SELECT
             spi.*
         FROM
-          USER_INFO sri
-        INNER JOIN MAP_ROLE_PERMISSION smrp ON smrp.role_id = sri.id
-        INNER JOIN PERMISSION_INFO spi ON smrp.permission_id = spi.id
+          role_info sri
+        INNER JOIN map_role_permission smrp ON smrp.role_id = sri.id
+        INNER JOIN permission_info spi ON smrp.permission_id = spi.id
         where
-         spi.status = 'enable'
+         spi.status = '1'
 
     </select>
 
@@ -31,8 +31,8 @@
         SELECT
             sri.*
         FROM
-          USER_INFO sri
+          role_info sri
         where
-         sri.status = 'enable'
+         sri.status = '1'
     </select>
 </mapper>
