@@ -10,6 +10,7 @@ import com.cloud.wechat.movies.security.pojo.MyGrantedAuthority;
 import com.cloud.wechat.movies.security.utils.ResUtil;
 import com.cloud.wechat.movies.security.utils.ResponseUtil;
 import com.cloud.wechat.movies.security.utils.SpringUtil;
+import com.cloud.wechat.movies.utils.SpringUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -25,6 +26,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,17 +76,19 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
      * @Param [request, response]
      **/
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request, HttpServletResponse response) throws CommonException {
-        StringRedisTemplate stringRedisTemplate = SpringUtil.getBean("stringRedisTemplate", StringRedisTemplate.class);
+        StringRedisTemplate stringRedisTemplate = SpringUtils.getBean("stringRedisTemplate", StringRedisTemplate.class);
 
         String token = request.getHeader(SecurityConstant.HEADER);
         if (StringUtils.isNotBlank(token)) {
             // 解析token
+            token = token.replace(SecurityConstant.TOKEN_SPLIT, "");
             Claims claims = null;
             try {
-                claims = Jwts.parserBuilder()
+                claims=  Jwts.parserBuilder().setSigningKey(DatatypeConverter.parseBase64Binary(SecurityConstant.tokenSigningKey)).build().parseClaimsJws(token).getBody();
+/*                claims = Jwts.parserBuilder()
                         .setSigningKey(SecurityConstant.tokenSigningKey).build()
                         .parseClaimsJws(token.replace(SecurityConstant.TOKEN_SPLIT, ""))
-                        .getBody();
+                        .getBody();*/
             } catch (ExpiredJwtException e) {
                 throw new CommonException(ResultCode.BAD_REQUEST, "登录已失效，请重新登录");
             } catch (Exception e) {

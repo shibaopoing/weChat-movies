@@ -12,6 +12,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import sun.misc.BASE64Decoder;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -116,12 +119,13 @@ public class TokenUtil<main> {
         return null;
     }
    /** * 解码PrivateKey * @param key * @return */
-   public static PrivateKey getPrivateKey(String key) {
+   public static Key getPrivateKey(String key) {
        try {
-          // byte[] byteKey = Base64.getDecoder().decode("bGl1aGVtaW5n");
-           byte[] decoded = (new BASE64Decoder()).decodeBuffer("NTQ1NjQ2NTRkc2Y0c2Q0ZnNkZnNkNTZmNHNkNTY0ZjU2c2Rm");
-           PrivateKey pubKey =  KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(decoded));
-           return pubKey;
+           SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+           // 生成秘钥
+           byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(key);
+           Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+           return signingKey;
        } catch (Exception e) {
            e.printStackTrace();
        }    return null;
@@ -132,7 +136,7 @@ public class TokenUtil<main> {
      * @param args
      */
     public static void main(String[] args) {
-        String str = "54564654dsf4sd4fsdfsd56f4sd564f56sdf";
+        String str = "NTQ1NjQ2NTRkc2Y0c2Q0ZnNkZnNkNTZmNHNkNTY0ZjU2c2RmNNTQ1NjQ2NTRkc2Y0c2Q0ZnNkZnNkNTZmNHNkNTY0ZjU2c2RmN";
         String res = Base64.getEncoder().encodeToString(str.getBytes());
        System.out.println(res);
     }

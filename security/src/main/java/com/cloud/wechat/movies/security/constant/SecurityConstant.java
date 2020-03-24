@@ -35,7 +35,7 @@ public interface SecurityConstant {
     /**
      * JWT签名加密key
      */
-    String tokenSigningKey = "liuheming";
+    String tokenSigningKey = "qwerasdfdxzvdfajjlkjeiojznvxndjkfaowijeiodldsxxccasdffgfhfgfcvbfedggfffssda1615316541615121315131315151asda";
 
     /**
      * 刷新Token时间
