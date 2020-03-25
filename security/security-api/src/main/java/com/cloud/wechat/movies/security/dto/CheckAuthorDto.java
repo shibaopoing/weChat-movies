@@ -16,7 +16,10 @@ import java.io.Serializable;
 public class CheckAuthorDto extends BaseReq implements Serializable {
     private  static final  long serialVersionUID=233120897433423L;
     //@NotBlank(message = "不能为空")
-    private String token;
-    private String method;
-    private String format;
+    private String token;   //
+    private String method;  //post get
+    private String url;     //请求地址
+    private String channel; //请求来源
+    private String action;  //请求动作
+    private String body;    //要校验的报文体
 }

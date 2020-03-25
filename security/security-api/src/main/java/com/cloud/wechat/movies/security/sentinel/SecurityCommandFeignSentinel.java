@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SecurityCommandFeignSentinel extends BaseSentinel implements SecurityCommandFeignApi {
     @Override
-    public BaseRsp AuthorToken(CheckAuthorDto checkAuthorDto) {
+    public BaseRsp AuthorTokenCheck(CheckAuthorDto checkAuthorDto) {
         return defualt();
     }
 }

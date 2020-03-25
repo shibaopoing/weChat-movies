@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(value = "security-command",fallback = SecurityCommandFeignSentinel.class)
 public interface SecurityCommandFeignApi {
     @PostMapping("/author")
-    public BaseRsp AuthorToken(CheckAuthorDto checkAuthorDto);
+    public BaseRsp AuthorTokenCheck(CheckAuthorDto checkAuthorDto);
 }
