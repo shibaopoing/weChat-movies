@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/getWay/getWay.iml" filepath="$PROJECT_DIR$/getWay/getWay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movie/movie.iml" filepath="$PROJECT_DIR$/movie/movie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movie/movie-api/movie-api.iml" filepath="$PROJECT_DIR$/movie/movie-api/movie-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movie/movie-provider/movie-provider.iml" filepath="$PROJECT_DIR$/movie/movie-provider/movie-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/security/security.iml" filepath="$PROJECT_DIR$/security/security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/security/security-api/security-api.iml" filepath="$PROJECT_DIR$/security/security-api/security-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/security/security-provider/security-provider.iml" filepath="$PROJECT_DIR$/security/security-provider/security-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/weChat-movies.iml" filepath="$PROJECT_DIR$/weChat-movies.iml" />
+    </modules>
+  </component>
+</project>
