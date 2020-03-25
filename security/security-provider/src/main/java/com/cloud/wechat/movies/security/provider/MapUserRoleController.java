@@ -1,4 +1,4 @@
-package com.cloud.wechat.movies.security.controller;
+package com.cloud.wechat.movies.security.provider;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;

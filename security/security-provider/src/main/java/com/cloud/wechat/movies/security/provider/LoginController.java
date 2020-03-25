@@ -1,4 +1,4 @@
-package com.cloud.wechat.movies.security.controller;
+package com.cloud.wechat.movies.security.provider;
 
 import com.cloud.wechat.movies.security.constant.ResultCode;
 import com.cloud.wechat.movies.security.exception.CommonException;

@@ -16,7 +16,7 @@ public interface SecurityConstant {
     /**
      * token分割
      */
-    String TOKEN_SPLIT = "Bearer";
+    String TOKEN_SPLIT = "Bearer ";
 
     /**
      * token中自定义权限标识

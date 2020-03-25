@@ -9,13 +9,13 @@ import com.cloud.wechat.movies.security.exception.CommonException;
 import com.cloud.wechat.movies.security.pojo.MyGrantedAuthority;
 import com.cloud.wechat.movies.security.utils.ResUtil;
 import com.cloud.wechat.movies.security.utils.ResponseUtil;
-import com.cloud.wechat.movies.security.utils.SpringUtil;
 import com.cloud.wechat.movies.utils.SpringUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -78,7 +78,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request, HttpServletResponse response) throws CommonException {
         StringRedisTemplate stringRedisTemplate = SpringUtils.getBean("stringRedisTemplate", StringRedisTemplate.class);
 
-        String token = request.getHeader(SecurityConstant.HEADER);
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (StringUtils.isNotBlank(token)) {
             // 解析token
             token = token.replace(SecurityConstant.TOKEN_SPLIT, "");

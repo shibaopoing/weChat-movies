@@ -2,15 +2,16 @@ package com.cloud.wechat.movies.security.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.cloud.wechat.movies.security.constant.ResultCode;
+import com.cloud.wechat.movies.security.service.IRoleInfoService;
 import com.cloud.wechat.movies.security.entity.RoleInfo;
 import com.cloud.wechat.movies.security.pojo.AuthUserDetails;
-import com.cloud.wechat.movies.security.service.IRoleInfoService;
 import com.cloud.wechat.movies.security.utils.ResUtil;
 import com.cloud.wechat.movies.security.utils.ResponseUtil;
 import com.cloud.wechat.movies.security.utils.TokenUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -68,17 +69,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
             redisTemplate.opsForValue().set("authentication:roleinfos:permissions", JSON.toJSONString(roleInfos),480,TimeUnit.MINUTES);
         }
-
-
         //创建token
         String accessToken = tokenUtil.createAccessJwtToken(authUserDetails);
-
         //存入redis
         redisTemplate.opsForValue().set("token_"+Username,accessToken,480,TimeUnit.MINUTES);
-
         HashMap<String,String> map=new HashMap<>();
         map.put("accessToken",accessToken);
-
+        response.setHeader("Content-Type", "application/json; charset=UTF-8");
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        response.setHeader(HttpHeaders.AUTHORIZATION, accessToken);
         ResponseUtil.out(response, ResUtil.getJsonStr(ResultCode.OK,"登录成功",map));
     }
 
