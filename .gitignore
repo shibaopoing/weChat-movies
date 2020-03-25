@@ -1,0 +1,45 @@
+.idea/
+*.iml
+
+# Gradle work
+.gradle
+build
+classes
+.classpath
+.settings/
+.project
+
+# maven ignore
+target/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+
+# IntelliJ IDEA work
+*.idea
+*.iml
+*.ipr
+*.iws
+atlassian-ide-plugin.xml
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# Android
+local.properties
+
+# Mac OS X
+.DS_Store
+
+# Except .gitignore
+!.gitignore
+/bin/
+*_cache
+*.lock
+
+
+/src/test/mybatis/*
