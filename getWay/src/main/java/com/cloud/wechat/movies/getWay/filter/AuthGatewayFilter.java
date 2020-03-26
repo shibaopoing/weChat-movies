@@ -1,8 +1,7 @@
 package com.cloud.wechat.movies.getWay.filter;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -11,28 +10,31 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Component
 public class AuthGatewayFilter implements GlobalFilter, Ordered
 {
+    @Value("${gateway.ignored.url}")
+    public  List ignoredList;
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getQueryParams().getFirst("authToken");
-        String ss= exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-/*        String body = StreamUtils.copyToString(exchange.getRequest()., Charset.forName("UTF-8"));
-        String username = null, password = null;
-        if(org.springframework.util.StringUtils.hasText(body)) {
-            JSONObject jsonObj = JSON.parseObject(body);
-            username = jsonObj.getString("userName");
-            password = jsonObj.getString("userPwd");
-        }*/
-        //返回401状态码和提示信息
+        //过滤掉不需要检查的url
+        boolean ignore=false;
+        String url = exchange.getRequest().getHeaders().getFirst("ss");
+        if(ignoredList.size()>0){
+            if(ignoredList.contains(url)){
+                ignore=true;
+            }
+        }
+        if(ignore){
+            return chain.filter(exchange);
+        }
+        String token= exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (StringUtils.isBlank(token)) {
             ServerHttpResponse response = exchange.getResponse();
             JSONObject message = new JSONObject();
